@@ -10,7 +10,16 @@ import Kingfisher
 
 struct PokemonCell: View {
     let pokemon: Pokemon
+    let viewModel: PokemonViewModel
+    let backgroundColor: Color
     
+    init(pokemon: Pokemon, viewModel: PokemonViewModel) {
+        self.pokemon = pokemon
+        self.viewModel = viewModel
+        self.backgroundColor = Color(viewModel.backgroundColor(forType: pokemon.type))
+    }
+    
+//    Pokemon Cell Configuration
     var body: some View {
         ZStack{
             VStack(alignment: .leading) {
@@ -40,14 +49,8 @@ struct PokemonCell: View {
                 }
             }
         }
-        .background(Color.green)
+        .background(backgroundColor)
         .cornerRadius(12)
-        .shadow(color: .green, radius: 6, x: 0.0, y: 0.0)
-    }
-}
-
-struct PokemonCell_Previews: PreviewProvider {
-    static var previews: some View {
-        PokemonCell(pokemon: MOCK_POKEMON[3])
+        .shadow(color: backgroundColor, radius: 6, x: 0.0, y: 0.0)
     }
 }

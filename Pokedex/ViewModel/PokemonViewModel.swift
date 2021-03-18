@@ -15,6 +15,7 @@ class PokemonViewModel: ObservableObject {
         fetchPokemon()
     }
     
+//    Retrieves Pokemon images from JSON endpoint
     func fetchPokemon() {
         guard let url = URL(string: baseUrl) else { return }
         
@@ -26,6 +27,22 @@ class PokemonViewModel: ObservableObject {
                 self.pokemon = pokemon
             }
         }.resume()
+    }
+    
+//    Returns corresponding background color of Pokemon Type
+    func backgroundColor(forType type: String) -> UIColor {
+        switch type {
+        case "fire": return .systemRed
+        case "poison": return .systemGreen
+        case "water": return .systemBlue
+        case "electric": return .systemYellow
+        case "psychic": return .systemPurple
+        case "normal": return .systemOrange
+        case "ground": return .systemGray
+        case "flying": return .systemTeal
+        case "fairy": return .systemPink
+        default: return .systemIndigo
+        }
     }
 }
 
